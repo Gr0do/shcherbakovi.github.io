@@ -34,43 +34,6 @@
         .envelope-card:hover {
             transform: scale(1.02);
         }
-        .flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffe0a3;
-            clip-path: polygon(0% 0%, 100% 0%, 50% 35%);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-origin: top;
-            border-radius: 12px 12px 0 0;
-        }
-        .envelope-card.open .flap {
-            clip-path: polygon(0% 0%, 100% 0%, 50% -80%);
-            opacity: 0;
-        }
-        .letter {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            top: 40px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: inset 0 0 0 1px #ffe0a3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #b97f44;
-            font-weight: bold;
-            transition: all 0.4s ease;
-        }
-        .envelope-card.open .letter {
-            transform: translateY(-20px);
-            opacity: 0;
-        }
         .envelope-text {
             position: absolute;
             bottom: 20px;
