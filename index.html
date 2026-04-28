@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Приглашение на свадьбу Никиты и Ксении</title>
-    <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- СТИЛИ КОНВЕРТА --- */
+        /* ---------- СТИЛИ КОНВЕРТА (увеличен, красивый) ---------- */
         .envelope {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #f9f1e0;
+            background: #f5ede0;  /* нежный кремовый фон */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -23,71 +22,94 @@
             transition: opacity 0.8s ease, visibility 0.8s;
         }
         .envelope-card {
-            width: 280px;
-            height: 180px;
-            background: #ffefcf;
-            border-radius: 12px;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            width: 380px;
+            height: 250px;
+            background: #f8e8d0;
+            border-radius: 16px;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,200,0.3);
             position: relative;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
         .envelope-card:hover {
             transform: scale(1.02);
         }
+        /* "Язычок" конверта (треугольная крышка) */
         .flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffe0a3;
-            clip-path: polygon(0% 0%, 100% 0%, 50% 35%);
+            background: #f2dcbc;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 40%);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             transform-origin: top;
-            border-radius: 12px 12px 0 0;
+            border-radius: 16px 16px 0 0;
+            z-index: 3;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
-        .envelope-card.open .flap {
-            clip-path: polygon(0% 0%, 100% 0%, 50% -80%);
-            opacity: 0;
-        }
+        /* Белый блок с надписью (нижняя часть конверта) */
         .letter {
             position: absolute;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            top: 40px;
+            top: 80px;   /* отступ от верхнего края = высота язычка */
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: white;
-            border-radius: 8px;
-            box-shadow: inset 0 0 0 1px #ffe0a3;
+            border-radius: 0 0 16px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            color: #b97f44;
-            font-weight: bold;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #7a4e2e;
+            padding: 1.5rem;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.02);
             transition: all 0.4s ease;
+            line-height: 1.3;
         }
-        .envelope-card.open .letter {
-            transform: translateY(-20px);
+        /* Анимация открытия: клапан поднимается, белый блок уезжает вниз */
+        .envelope-card.open .flap {
+            clip-path: polygon(0% 0%, 100% 0%, 50% -60%);
             opacity: 0;
         }
+        .envelope-card.open .letter {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        /* Дополнительная подпись снизу (можно оставить) */
         .envelope-text {
             position: absolute;
-            bottom: 20px;
+            bottom: -35px;
             left: 0;
             right: 0;
             text-align: center;
-            font-size: 18px;
-            color: #b97f44;
-            font-weight: bold;
+            font-size: 1rem;
+            color: #ad8b6c;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: 1px;
             pointer-events: none;
         }
-        @media (max-width: 600px) {
-            .envelope-card { width: 240px; height: 160px; }
-            .envelope-text { font-size: 14px; }
+        @media (max-width: 550px) {
+            .envelope-card {
+                width: 280px;
+                height: 190px;
+            }
+            .letter {
+                top: 60px;
+                font-size: 1.3rem;
+                padding: 0.5rem;
+            }
+            .envelope-text {
+                bottom: -30px;
+                font-size: 0.85rem;
+            }
         }
 
-        /* --- ОСНОВНОЙ КОНТЕНТ (скрыт изначально) --- */
+        /* ---------- ОСНОВНОЙ КОНТЕНТ (скрыт изначально) ---------- */
         .main-content {
             opacity: 0;
             visibility: hidden;
@@ -98,7 +120,7 @@
             visibility: visible;
         }
 
-        /* --- ВСЕ ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ (без изменений) --- */
+        /* ---------- ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ (не менялись) ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -418,16 +440,18 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ ПОВЕРХ ВСЕГО -->
+<!-- КОНВЕРТ -->
 <div class="envelope" id="envelopeIntro">
     <div class="envelope-card" id="envelopeCard">
         <div class="flap"></div>
-        <div class="letter">💌 Приглашение</div>
-        <div class="envelope-text">Нажмите, чтобы открыть</div>
+        <div class="letter">
+            Вы приглашены<br>на свадьбу!
+        </div>
+        <div class="envelope-text">нажмите, чтобы открыть</div>
     </div>
 </div>
 
-<!-- ОСНОВНОЕ СОДЕРЖИМОЕ (скрыто, пока конверт не откроют) -->
+<!-- ОСНОВНОЙ КОНТЕНТ ВАШЕГО ПРИГЛАШЕНИЯ -->
 <div class="main-content" id="mainContent">
     <div class="custom-bg"></div>
     <div class="bg-overlay"></div>
@@ -491,70 +515,16 @@
         </div>
 
         <div class="timeline-list">
-            <div class="card">
-                <div class="card-header">✦ Торжественная церемония</div>
-                <div class="card-content">
-                    <div class="detail-item"><span class="highlight">Сбор гостей:</span> 11:00 (просьба не опаздывать)</div>
-                    <div class="detail-item"><span class="highlight">Начало церемонии:</span> 11:20</div>
-                    <div class="detail-item"><span class="highlight">Место проведения:</span> Отдел ЗАГС г. Арзамас и Арзамасского района.<br>Адрес: Нижегородская область, г. Арзамас, проспект Ленина, д. 131</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">❀ Свободное время для вас</div>
-                <div class="card-content">
-                    <div class="detail-item">После церемонии — приятный перерыв, чтобы отдохнуть, прогуляться и насладиться моментом.</div>
-                    <div class="detail-item">Вы можете составить нам компанию на небольших фотосессии до 14:00.</div>
-                    <div class="detail-item">Ориентировочное время: с <strong>12:00 до 14:50</strong></div>
-                    <div class="note">Проведите это время с удовольствием: фото, тёплые беседы, небольшой глоток шампанского.</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">◈ Гостевой дом «Камыши»</div>
-                <div class="card-content">
-                    <div class="detail-item"><span class="highlight">К 15:00</span> всем гостям необходимо прибыть на основную локацию.</div>
-                    <div class="detail-item"><strong>Адрес:</strong> г. Арзамас, разъезд 408, д.7
-                        <button class="btn-copy" data-copy="г. Арзамас, разъезд 408, д.7">✎ Копировать</button>
-                    </div>
-                    <div class="detail-item">Официальный дресс-код сохраняется и для вечерней части.</div>
-                    <div class="detail-item"><span class="highlight">При желании</span> можно взять с собой купальник / сменную одежду, потому что для вас будут доступны <strong>сауна, чан и бассейн</strong>.
-                        <div class="good-mood">и хорошее настроение!</div>
-                    </div>
-                    <div class="map-placeholder">
-                        ◉ Разъезд 408, д.7, Арзамас — гостевой дом «Камыши»<br>
-                        <span style="font-size:0.85rem;">Просторная территория, парковка, уютный дом для праздника</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">✧ Хронология праздника</div>
-                <div class="card-content">
-                    <div class="detail-item"><strong>11:00</strong> — Встреча гостей перед церемонией (ЗАГС, пр. Ленина, 131)</div>
-                    <div class="detail-item"><strong>11:20</strong> — Церемония бракосочетания</div>
-                    <div class="detail-item"><strong>12:00 – 14:50</strong> — Свободное время, приятные хлопоты</div>
-                    <div class="detail-item"><strong>15:00</strong> — Сбор в гостевом доме «Камыши» (официальный дресс-код)</div>
-                    <div class="detail-item"><strong>Вечерняя программа</strong> + баня, чан, бассейн (купальники приветствуются)</div>
-                    <hr>
-                    <div class="note">Маленькая просьба: возьмите с собой улыбку и тёплые объятия, остальное мы организуем с любовью!</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">❁ Сердечные пожелания</div>
-                <div class="card-content">
-                    <div class="detail-item">По любым вопросам вы всегда можете связаться с нашими близкими или организаторами — мы на связи.</div>
-                    <div class="detail-item">Для нас главное — разделить этот день с вами. Пусть каждый миг согреет душу.</div>
-                    <div class="note">Мы очень ждём вас и верим, что этот день останется в памяти, как одно из самых светлых мгновений!</div>
-                </div>
-            </div>
+            <div class="card"><div class="card-header">✦ Торжественная церемония</div><div class="card-content"><div class="detail-item"><span class="highlight">Сбор гостей:</span> 11:00 (просьба не опаздывать)</div><div class="detail-item"><span class="highlight">Начало церемонии:</span> 11:20</div><div class="detail-item"><span class="highlight">Место проведения:</span> Отдел ЗАГС г. Арзамас и Арзамасского района.<br>Адрес: Нижегородская область, г. Арзамас, проспект Ленина, д. 131</div></div></div>
+            <div class="card"><div class="card-header">❀ Свободное время для вас</div><div class="card-content"><div class="detail-item">После церемонии — приятный перерыв, чтобы отдохнуть, прогуляться и насладиться моментом.</div><div class="detail-item">Вы можете составить нам компанию на небольших фотосессии до 14:00.</div><div class="detail-item">Ориентировочное время: с <strong>12:00 до 14:50</strong></div><div class="note">Проведите это время с удовольствием: фото, тёплые беседы, небольшой глоток шампанского.</div></div></div>
+            <div class="card"><div class="card-header">◈ Гостевой дом «Камыши»</div><div class="card-content"><div class="detail-item"><span class="highlight">К 15:00</span> всем гостям необходимо прибыть на основную локацию.</div><div class="detail-item"><strong>Адрес:</strong> г. Арзамас, разъезд 408, д.7 <button class="btn-copy" data-copy="г. Арзамас, разъезд 408, д.7">✎ Копировать</button></div><div class="detail-item">Официальный дресс-код сохраняется и для вечерней части.</div><div class="detail-item"><span class="highlight">При желании</span> можно взять с собой купальник / сменную одежду, потому что для вас будут доступны <strong>сауна, чан и бассейн</strong>.<div class="good-mood">и хорошее настроение!</div></div><div class="map-placeholder">◉ Разъезд 408, д.7, Арзамас — гостевой дом «Камыши»<br><span style="font-size:0.85rem;">Просторная территория, парковка, уютный дом для праздника</span></div></div></div>
+            <div class="card"><div class="card-header">✧ Хронология праздника</div><div class="card-content"><div class="detail-item"><strong>11:00</strong> — Встреча гостей перед церемонией (ЗАГС, пр. Ленина, 131)</div><div class="detail-item"><strong>11:20</strong> — Церемония бракосочетания</div><div class="detail-item"><strong>12:00 – 14:50</strong> — Свободное время, приятные хлопоты</div><div class="detail-item"><strong>15:00</strong> — Сбор в гостевом доме «Камыши» (официальный дресс-код)</div><div class="detail-item"><strong>Вечерняя программа</strong> + баня, чан, бассейн (купальники приветствуются)</div><hr><div class="note">Маленькая просьба: возьмите с собой улыбку и тёплые объятия, остальное мы организуем с любовью!</div></div></div>
+            <div class="card"><div class="card-header">❁ Сердечные пожелания</div><div class="card-content"><div class="detail-item">По любым вопросам вы всегда можете связаться с нашими близкими или организаторами — мы на связи.</div><div class="detail-item">Для нас главное — разделить этот день с вами. Пусть каждый миг согреет душу.</div><div class="note">Мы очень ждём вас и верим, что этот день останется в памяти, как одно из самых светлых мгновений!</div></div></div>
         </div>
 
         <div class="dresscode-block">
             <p>Мы очень старались сделать праздник идеальным. Поэтому нам будет приятно, если вы поддержите цветовую гамму нашего торжества, не используя яркие цвета в своих прекрасных нарядах.</p>
-            <div class="color-dots">
-                <div class="color-dot dot-gray" title="Пастельный серый"></div>
-                <div class="color-dot dot-brown" title="Пастельный коричневый"></div>
-                <div class="color-dot dot-olive" title="Пастельный оливковый"></div>
-                <div class="color-dot dot-beige" title="Пастельный бежевый"></div>
-            </div>
+            <div class="color-dots"><div class="color-dot dot-gray" title="Пастельный серый"></div><div class="color-dot dot-brown" title="Пастельный коричневый"></div><div class="color-dot dot-olive" title="Пастельный оливковый"></div><div class="color-dot dot-beige" title="Пастельный бежевый"></div></div>
             <p style="font-size: 0.9rem; margin-top: 0.8rem; opacity: 0.8;">официальный праздничный дресс-код</p>
         </div>
 
@@ -562,15 +532,12 @@
             <p>❀ <strong>Очень просим:</strong> не дарите цветы в подарок! После торжества мы отправимся в свадебное путешествие и не успеем насладиться их красотой. ❀</p>
         </div>
 
-        <footer>
-            ~ С любовью, Никита и Ксения ~ <br>
-            25 июля 2026 · Ждём вас в нашей семейной сказке
-        </footer>
+        <footer>~ С любовью, Никита и Ксения ~ <br>25 июля 2026 · Ждём вас в нашей семейной сказке</footer>
     </div>
 </div>
 
 <script>
-    // Анимация конверта
+    // Анимация открытия конверта
     (function() {
         const envelopeBlock = document.getElementById('envelopeIntro');
         const envelopeCard = document.getElementById('envelopeCard');
@@ -592,7 +559,7 @@
         envelopeBlock.addEventListener('click', openEnvelope);
     })();
 
-    // Ваш оригинальный скрипт (анимация карточек при скролле и копирование)
+    // Анимация карточек при скролле
     const cards = document.querySelectorAll('.card');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -605,6 +572,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
     cards.forEach(card => observer.observe(card));
 
+    // Копирование адреса
     document.querySelectorAll('.btn-copy').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
