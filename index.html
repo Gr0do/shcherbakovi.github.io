@@ -98,7 +98,7 @@
             visibility: visible;
         }
 
-        /* --- ВСЕ ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ (с изменённым фоном) --- */
+        /* --- ВСЕ ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ (с изменённым фоном и удалённым оверлеем) --- */
         * {
             margin: 0;
             padding: 0;
@@ -111,30 +111,22 @@
             position: relative;
             min-height: 100vh;
         }
-        /* НОВЫЙ ФОН - ваше изображение */
+        /* НОВЫЙ ФОН - ваше изображение (без затемнения) */
         .custom-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://i.ibb.co/8nrvb6s8/d0a383fd-7b81-4ef0-b1be-98f6fe5f5b6f-Nero-AI-Image-Upscaler-Photo.png');
+            background-image: url('https://i.ibb.co/gM36FCTV/d0a383fd-7b81-4ef0-b1be-98f6fe5f5b6f-Nero-AI-Image-Upscaler-Photo.png');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             z-index: -3;
         }
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(245, 240, 225, 0.3);
-            backdrop-filter: brightness(0.98) contrast(1.02);
-            z-index: -2;
-            pointer-events: none;
-        }
+        /* ОВЕРЛЕЙ ПОЛНОСТЬЮ УБРАН — фон теперь чистый */
+        /* .bg-overlay удалён */
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -431,7 +423,7 @@
 <!-- ОСНОВНОЕ СОДЕРЖИМОЕ (скрыто, пока конверт не откроют) -->
 <div class="main-content" id="mainContent">
     <div class="custom-bg"></div>
-    <div class="bg-overlay"></div>
+    <!-- bg-overlay полностью удалён -->
 
     <div class="container">
         <div class="hero">
