@@ -34,6 +34,43 @@
         .envelope-card:hover {
             transform: scale(1.02);
         }
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffe0a3;
+            clip-path: polygon(0% 0%, 100% 0%, 50% 35%);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-origin: top;
+            border-radius: 12px 12px 0 0;
+        }
+        .envelope-card.open .flap {
+            clip-path: polygon(0% 0%, 100% 0%, 50% -80%);
+            opacity: 0;
+        }
+        .letter {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            top: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px #ffe0a3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #b97f44;
+            font-weight: bold;
+            transition: all 0.4s ease;
+        }
+        .envelope-card.open .letter {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
         .envelope-text {
             position: absolute;
             bottom: 20px;
@@ -377,75 +414,18 @@
             .detail-item { font-size: 1rem; }
             .color-dot { width: 44px; height: 44px; }
         }
-        .env-img {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transition: all 0.8s ease;
-}
-
-.env-closed {
-    opacity: 1;
-    z-index: 2;
-}
-
-.env-open {
-    opacity: 0;
-    transform: scale(0.95);
-    z-index: 1;
-}
-
-.envelope-card.open .env-closed {
-    opacity: 0;
-    transform: scale(0.9);
-}
-
-.envelope-card.open .env-open {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.envelope-text {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    text-align: center;
-    color: #4e3a28;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.envelope-date {
-    font-size: 16px;
-}
-
     </style>
 </head>
 <body>
 
 <!-- КОНВЕРТ ПОВЕРХ ВСЕГО -->
-<div class="envelope-card" id="envelopeCard">
-
-    <!-- ЗАКРЫТЫЙ PNG -->
-    <img 
-        src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=600&q=80"
-        class="env-img env-closed"
-    >
-
-    <!-- ОТКРЫТЫЙ PNG -->
-    <img 
-        src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=600&q=80"
-        class="env-img env-open"
-    >
-
-    <div class="envelope-text">
-        Приглашение<br>
-        <span class="envelope-date">25.07.2026</span>
+<div class="envelope" id="envelopeIntro">
+    <div class="envelope-card" id="envelopeCard">
+        <div class="flap"></div>
+        <div class="letter">💌 Приглашение</div>
+        <div class="envelope-text">Нажмите, чтобы открыть</div>
     </div>
-
 </div>
-
 
 <!-- ОСНОВНОЕ СОДЕРЖИМОЕ (скрыто, пока конверт не откроют) -->
 <div class="main-content" id="mainContent">
