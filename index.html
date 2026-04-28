@@ -377,6 +377,49 @@
             .detail-item { font-size: 1rem; }
             .color-dot { width: 44px; height: 44px; }
         }
+        .env-img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transition: all 0.8s ease;
+}
+
+.env-closed {
+    opacity: 1;
+    z-index: 2;
+}
+
+.env-open {
+    opacity: 0;
+    transform: scale(0.95);
+    z-index: 1;
+}
+
+.envelope-card.open .env-closed {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.envelope-card.open .env-open {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.envelope-text {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    color: #4e3a28;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.envelope-date {
+    font-size: 16px;
+}
+
     </style>
 </head>
 <body>
