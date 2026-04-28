@@ -1,368 +1,290 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Приглашение на свадьбу Никиты и Ксении</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            color: #2e2a24;
-            scroll-behavior: smooth;
-            position: relative;
-            min-height: 100vh;
-        }
-        .custom-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #DCDDCC;
-            z-index: -3;
-        }
-        /* Цветочный декор (SVG встроен через псевдоэлементы, чтобы не мешать) */
-        .flower-left {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 280px;
-            max-width: 30vw;
-            z-index: -2;
-            pointer-events: none;
-            opacity: 0.75;
-        }
-        .flower-right {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 260px;
-            max-width: 28vw;
-            z-index: -2;
-            pointer-events: none;
-            opacity: 0.7;
-            transform: scaleX(-1);
-        }
-        @media (max-width: 768px) {
-            .flower-left, .flower-right { width: 40%; opacity: 0.5; }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Приглашение на свадьбу Никиты и Ксении</title>
 
-        /* Конверт-оверлей */
-        .envelope-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #F4F1E6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            cursor: pointer;
-            transition: opacity 0.6s ease, visibility 0.6s;
-        }
-        .envelope-img {
-            max-width: 70%;
-            max-height: 80%;
-            filter: drop-shadow(0 20px 25px rgba(0,0,0,0.15));
-            transition: transform 0.3s, opacity 0.5s;
-        }
-        .envelope-overlay:hover .envelope-img { transform: scale(1.02); }
-        .envelope-overlay.hide { opacity: 0; visibility: hidden; }
-        .envelope-overlay.hide .envelope-img { transform: scale(0.95); opacity: 0; }
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        /* Основной контент */
-        .main-content {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.9s ease, visibility 0.9s;
-        }
-        .main-content.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1.8rem 4rem;
-            position: relative;
-            z-index: 10;
-        }
-        /* Остальные стили (ваши, неизменные) */
-        .hero {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1.8rem 0.5rem 1.2rem;
-            background: rgba(255, 253, 245, 0.85);
-            backdrop-filter: blur(4px);
-            border-radius: 4rem;
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
-        }
-        .hero h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.8rem;
-            font-weight: 400;
-            color: #7c5d44;
-            letter-spacing: 1px;
-        }
-        .calendar-wrapper {
-            display: inline-block;
-            background: rgba(255, 248, 235, 0.95);
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            padding: 1rem 1.2rem;
-            margin-top: 1rem;
-            border: 1px solid #eedbcb;
-        }
-        .calendar-month-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-            color: #9b6e52;
-            text-align: center;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.3rem;
-            text-align: center;
-            font-family: 'Great Vibes', cursive;
-        }
-        .calendar-weekday { font-size: 1rem; color: #7c5d44; padding: 0.2rem; }
-        .calendar-day { font-size: 1.2rem; padding: 0.3rem 0; color: #3a2c23; }
-        .calendar-day.heart { color: #AA7B58; font-weight: bold; position: relative; }
-        .calendar-day.heart::after {
-            content: "♥";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.9rem;
-            opacity: 0.5;
-            z-index: -1;
-        }
-        .empty-day { opacity: 0.3; }
-        .greeting {
-            background: rgba(255, 248, 235, 0.85);
-            backdrop-filter: blur(5px);
-            border-radius: 2rem;
-            padding: 1.6rem 1.8rem;
-            margin: 1.8rem 0 2rem;
-            text-align: center;
-            font-size: 1.5rem;
-            border-left: 5px solid #C3B89E;
-            border-right: 5px solid #C3B89E;
-        }
-        .warm-text {
-            font-size: 1.7rem;
-            font-weight: 600;
-            color: #b2653c;
-        }
-        .timeline-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        .card {
-            background: rgba(255, 253, 249, 0.96);
-            border-radius: 2rem;
-            overflow: hidden;
-            border: 1px solid #efe1d2;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .card.revealed { opacity: 1; transform: translateY(0); }
-        .card-header {
-            padding: 1.3rem 1.8rem 0.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #AA7B58;
-            border-bottom: 1px dashed #eedbcb;
-            background: #fffaf5;
-        }
-        .card-content {
-            padding: 0.7rem 1.8rem 1.8rem;
-            font-size: 1.25rem;
-        }
-        .detail-item { margin: 1rem 0; }
-        .highlight { font-weight: 700; color: #bc7a4a; }
-        .note {
-            background: #fef3ea;
-            border-radius: 1.3rem;
-            padding: 0.8rem 1.3rem;
-            margin-top: 1rem;
-            border-left: 4px solid #e3c6ac;
-        }
-        .btn-copy {
-            background: #f2e5db;
-            border: none;
-            border-radius: 30px;
-            padding: 0.25rem 1rem;
-            margin-left: 0.7rem;
-            cursor: pointer;
-        }
-        .map-placeholder {
-            background: #e8dfd3;
-            border-radius: 1.2rem;
-            padding: 0.8rem;
-            text-align: center;
-            margin-top: 0.8rem;
-        }
-        hr { margin: 1rem 0; border: 0; height: 1px; background: linear-gradient(90deg, #eedbcb, transparent); }
-        .good-mood {
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: #bf7c4a;
-            background: #fff1e4;
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            margin-top: 0.5rem;
-        }
-        .dresscode-block {
-            background: rgba(255, 248, 235, 0.92);
-            border-radius: 2rem;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            border: 1px solid #e6cfb5;
-        }
-        .color-dots { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem; }
-        .color-dot { width: 56px; height: 56px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .dot-gray { background-color: #D3D3D3; }
-        .dot-brown { background-color: #C4A484; }
-        .dot-olive { background-color: #A3B86C; }
-        .dot-beige { background-color: #F5F5DC; }
-        .flower-request {
-            background: rgba(255, 248, 235, 0.9);
-            border-radius: 2rem;
-            padding: 1.2rem 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            border: 1px solid #e6cfb5;
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5d5c6;
-        }
-        @media (max-width: 550px) {
-            .hero h1 { font-size: 2.2rem; }
-            .card-header { font-size: 1.7rem; }
-        }
-    </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Cormorant Garamond',serif;
+    background:#DCDDCC;
+    color:#2e2a24;
+    overflow-x:hidden;
+}
+
+/* ================= PREMIUM ENVELOPE ================= */
+
+.envelope-overlay{
+    position:fixed;
+    inset:0;
+    background:#F4F1E6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    cursor:pointer;
+}
+
+.envelope-premium{
+    position:relative;
+    width:320px;
+    height:220px;
+    perspective:1200px;
+}
+
+/* BODY */
+.envelope-body{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#A3B86C;
+    border-radius:16px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.25);
+    overflow:hidden;
+}
+
+/* FLAP */
+.envelope-flap{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#B7C98A;
+    clip-path:polygon(0 0,50% 60%,100% 0);
+    transform-origin:top;
+    transition:transform 1s cubic-bezier(.65,.05,.36,1);
+    z-index:5;
+}
+
+/* STAMP */
+.stamp{
+    position:absolute;
+    width:70px;
+    height:50px;
+    top:20px;
+    right:20px;
+    background:#E8E2D3;
+    border-radius:6px;
+}
+
+/* SEAL */
+.seal{
+    position:absolute;
+    width:50px;
+    height:50px;
+    background:#C4A484;
+    border-radius:50%;
+    top:20px;
+    left:20px;
+}
+
+/* TEXT */
+.envelope-text{
+    position:absolute;
+    bottom:30px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-size:20px;
+}
+
+.envelope-text .date{
+    font-size:18px;
+    margin-top:5px;
+}
+
+/* LETTER */
+.letter{
+    position:absolute;
+    width:85%;
+    height:85%;
+    background:#fffdf6;
+    top:10%;
+    left:7.5%;
+    border-radius:12px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+    transform:translateY(60px);
+    opacity:0;
+    transition:all 1s ease;
+}
+
+/* OPEN STATE */
+.envelope-premium.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.envelope-premium.open .letter{
+    transform:translateY(-20px);
+    opacity:1;
+}
+
+/* FADE OUT */
+.envelope-overlay.hide{
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main-content{
+    opacity:0;
+    transition:opacity 1.2s ease;
+}
+
+.main-content.show{
+    opacity:1;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:2rem;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    background:#fffaf5;
+    padding:2rem;
+    border-radius:40px;
+}
+
+.hero h1{
+    font-family:'Great Vibes',cursive;
+    font-size:2.6rem;
+    color:#7c5d44;
+}
+
+/* GREETING */
+.greeting{
+    margin:2rem 0;
+    padding:1.5rem;
+    background:#fffaf5;
+    border-radius:20px;
+    text-align:center;
+    font-size:1.4rem;
+}
+
+.warm-text{
+    font-size:1.6rem;
+    color:#b2653c;
+}
+
+/* CARDS */
+.timeline-list{
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:1.5rem;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card-header{
+    font-size:1.6rem;
+    color:#AA7B58;
+    margin-bottom:0.5rem;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    margin-top:2rem;
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="custom-bg"></div>
-
-<!-- Левый цветок: белая калла (SVG) -->
-<img class="flower-left" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 300'%3E%3Cpath fill='%23FFFFFF' stroke='%23E0E0D0' stroke-width='1' d='M100,280 Q70,230 80,160 Q95,100 100,40 Q105,100 120,160 Q130,230 100,280 Z' /%3E%3Cpath fill='%23F5F5DC' d='M100,260 Q75,220 82,160 Q97,108 100,60 Q103,108 118,160 Q125,220 100,260 Z' /%3E%3Cpath fill='%2390a955' d='M85,180 L45,260 L70,265 L95,200 Z' /%3E%3Cpath fill='%23789c42' d='M115,180 L155,260 L130,265 L105,200 Z' /%3E%3C/svg%3E" alt="Каллы">
-
-<!-- Правый цветок: гортензия (SVG) -->
-<img class="flower-right" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 300'%3E%3Ccircle cx='120' cy='220' r='18' fill='%23FFFFFF'/%3E%3Ccircle cx='140' cy='200' r='16' fill='%23FDFDF5'/%3E%3Ccircle cx='100' cy='210' r='15' fill='%23FFFFFF'/%3E%3Ccircle cx='130' cy='240' r='14' fill='%23FEFEF7'/%3E%3Ccircle cx='155' cy='230' r='12' fill='%23FFFFFF'/%3E%3Ccircle cx='85' cy='235' r='13' fill='%23FFFFFF'/%3E%3Ccircle cx='110' cy='260' r='15' fill='%23F5F5EE'/%3E%3Ccircle cx='145' cy='260' r='14' fill='%23FFFFFF'/%3E%3Cpath fill='%237aa84d' d='M100,280 L80,290 L120,295 L135,280 Z' /%3E%3C/svg%3E" alt="Гортензия">
-
-<!-- КОНВЕРТ (оливковый, пастельный) встроенный SVG -->
+<!-- PREMIUM ENVELOPE -->
 <div class="envelope-overlay" id="envelopeIntro">
-    <img class="envelope-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 280'%3E%3Crect width='400' height='280' rx='20' fill='%23C3D1B6' /%3E%3Cpath d='M0,0 L200,140 L400,0 Z' fill='%23E0E6D3' /%3E%3Cpath d='M0,0 L200,140 L400,0 L400,280 L0,280 Z' fill='%23D6E0C5' /%3E%3Ctext x='200' y='190' font-family='Georgia, serif' font-size='28' fill='%236B5A3E' text-anchor='middle' font-weight='bold'%3EВы приглашены%3C/text%3E%3Ctext x='200' y='225' font-family='Georgia, serif' font-size='24' fill='%236B5A3E' text-anchor='middle'%3Eна свадьбу!%3C/text%3E%3C/svg%3E" alt="Приглашение">
+    <div class="envelope-premium" id="envelope">
+
+        <div class="envelope-flap"></div>
+
+        <div class="envelope-body">
+            <div class="stamp"></div>
+            <div class="seal"></div>
+
+            <div class="envelope-text">
+                <div>Приглашение</div>
+                <div class="date">25.07.2026</div>
+            </div>
+        </div>
+
+        <div class="letter"></div>
+
+    </div>
 </div>
 
-<!-- ОСНОВНОЙ КОНТЕНТ -->
+<!-- MAIN CONTENT -->
 <div class="main-content" id="mainContent">
     <div class="container">
+
         <div class="hero">
-            <h1>Приглашение на свадьбу<br>Никиты и Ксении</h1>
-            <div class="calendar-wrapper">
-                <div class="calendar-month-title">Июль 2026</div>
-                <div class="calendar-grid">
-                    <div class="calendar-weekday">Пн</div><div class="calendar-weekday">Вт</div><div class="calendar-weekday">Ср</div><div class="calendar-weekday">Чт</div>
-                    <div class="calendar-weekday">Пт</div><div class="calendar-weekday">Сб</div><div class="calendar-weekday">Вс</div>
-                    <div class="calendar-day empty-day"></div><div class="calendar-day empty-day"></div>
-                    <div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div>
-                    <div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div>
-                    <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div>
-                    <div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
-                    <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div>
-                    <div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day">24</div>
-                    <div class="calendar-day heart">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div>
-                    <div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day">31</div>
-                    <div class="calendar-day empty-day"></div><div class="calendar-day empty-day"></div>
-                </div>
-            </div>
+            <h1>Никита & Ксения</h1>
+            <p>25 июля 2026</p>
         </div>
 
         <div class="greeting">
             <p><strong>Дорогие гости!</strong></p>
-            <p class="warm-text">«Счастье становится вдвойне ярче, когда им делишься с близкими»</p>
-            <p>С огромной радостью приглашаем вас стать частью нашей семейной истории. Пусть этот день наполнится нежностью, улыбками и теплом. Ждём вас с открытым сердцем!</p>
+            <p class="warm-text">Счастье ярче, когда делишься им</p>
+            <p>Будем рады видеть вас на нашей свадьбе</p>
         </div>
 
         <div class="timeline-list">
-            <div class="card"><div class="card-header">✦ Торжественная церемония</div><div class="card-content"><div class="detail-item"><span class="highlight">Сбор гостей:</span> 11:00 (просьба не опаздывать)</div><div class="detail-item"><span class="highlight">Начало церемонии:</span> 11:20</div><div class="detail-item"><span class="highlight">Место проведения:</span> Отдел ЗАГС г. Арзамас и Арзамасского района.<br>Адрес: Нижегородская область, г. Арзамас, проспект Ленина, д. 131</div></div></div>
-            <div class="card"><div class="card-header">❀ Свободное время для вас</div><div class="card-content"><div class="detail-item">После церемонии — приятный перерыв, чтобы отдохнуть, прогуляться и насладиться моментом.</div><div class="detail-item">Вы можете составить нам компанию на небольших фотосессии до 14:00.</div><div class="detail-item">Ориентировочное время: с <strong>12:00 до 14:50</strong></div><div class="note">Проведите это время с удовольствием: фото, тёплые беседы, небольшой глоток шампанского.</div></div></div>
-            <div class="card"><div class="card-header">◈ Гостевой дом «Камыши»</div><div class="card-content"><div class="detail-item"><span class="highlight">К 15:00</span> всем гостям необходимо прибыть на основную локацию.</div><div class="detail-item"><strong>Адрес:</strong> г. Арзамас, разъезд 408, д.7 <button class="btn-copy" data-copy="г. Арзамас, разъезд 408, д.7">✎ Копировать</button></div><div class="detail-item">Официальный дресс-код сохраняется и для вечерней части.</div><div class="detail-item"><span class="highlight">При желании</span> можно взять с собой купальник / сменную одежду, потому что для вас будут доступны <strong>сауна, чан и бассейн</strong>.<div class="good-mood">и хорошее настроение!</div></div><div class="map-placeholder">◉ Разъезд 408, д.7, Арзамас — гостевой дом «Камыши»<br><span style="font-size:0.85rem;">Просторная территория, парковка, уютный дом для праздника</span></div></div></div>
-            <div class="card"><div class="card-header">✧ Хронология праздника</div><div class="card-content"><div class="detail-item"><strong>11:00</strong> — Встреча гостей перед церемонией (ЗАГС, пр. Ленина, 131)</div><div class="detail-item"><strong>11:20</strong> — Церемония бракосочетания</div><div class="detail-item"><strong>12:00 – 14:50</strong> — Свободное время, приятные хлопоты</div><div class="detail-item"><strong>15:00</strong> — Сбор в гостевом доме «Камыши» (официальный дресс-код)</div><div class="detail-item"><strong>Вечерняя программа</strong> + баня, чан, бассейн (купальники приветствуются)</div><hr><div class="note">Маленькая просьба: возьмите с собой улыбку и тёплые объятия, остальное мы организуем с любовью!</div></div></div>
-            <div class="card"><div class="card-header">❁ Сердечные пожелания</div><div class="card-content"><div class="detail-item">По любым вопросам вы всегда можете связаться с нашими близкими или организаторами — мы на связи.</div><div class="detail-item">Для нас главное — разделить этот день с вами. Пусть каждый миг согреет душу.</div><div class="note">Мы очень ждём вас и верим, что этот день останется в памяти, как одно из самых светлых мгновений!</div></div></div>
+
+            <div class="card">
+                <div class="card-header">Церемония</div>
+                <p>11:00 — сбор гостей</p>
+                <p>11:20 — начало</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Праздник</div>
+                <p>15:00 — гостевой дом «Камыши»</p>
+            </div>
+
         </div>
 
-        <div class="dresscode-block">
-            <p>Мы очень старались сделать праздник идеальным. Поэтому нам будет приятно, если вы поддержите цветовую гамму нашего торжества, не используя яркие цвета в своих прекрасных нарядах.</p>
-            <div class="color-dots"><div class="color-dot dot-gray" title="Пастельный серый"></div><div class="color-dot dot-brown" title="Пастельный коричневый"></div><div class="color-dot dot-olive" title="Пастельный оливковый"></div><div class="color-dot dot-beige" title="Пастельный бежевый"></div></div>
-            <p style="font-size: 0.9rem; margin-top: 0.8rem; opacity: 0.8;">официальный праздничный дресс-код</p>
-        </div>
+        <footer>
+            С любовью, Никита и Ксения ❤️
+        </footer>
 
-        <div class="flower-request">
-            <p>❀ <strong>Очень просим:</strong> не дарите цветы в подарок! После торжества мы отправимся в свадебное путешествие и не успеем насладиться их красотой. ❀</p>
-        </div>
-
-        <footer>~ С любовью, Никита и Ксения ~ <br>25 июля 2026 · Ждём вас в нашей семейной сказке</footer>
     </div>
 </div>
 
 <script>
-    // Анимация конверта
-    const envelopeBlock = document.getElementById('envelopeIntro');
-    const mainContent = document.getElementById('mainContent');
-    let opened = false;
-    envelopeBlock.addEventListener('click', () => {
-        if (opened) return;
-        opened = true;
-        envelopeBlock.classList.add('hide');
-        setTimeout(() => {
-            mainContent.classList.add('show');
-            envelopeBlock.style.display = 'none';
-        }, 800);
-    });
+const envelope = document.getElementById('envelope');
+const overlay = document.getElementById('envelopeIntro');
+const main = document.getElementById('mainContent');
 
-    // Анимация карточек
-    const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.isIntersecting ? e.target.classList.add('revealed') : e.target.classList.remove('revealed'));
-    }, { threshold: 0.2 });
-    cards.forEach(c => observer.observe(c));
+let opened = false;
 
-    // Копирование адреса
-    document.querySelectorAll('.btn-copy').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const text = this.dataset.copy;
-            if (!text) return;
-            navigator.clipboard.writeText(text).then(() => {
-                const old = this.textContent;
-                this.textContent = '✔ Скопировано!';
-                setTimeout(() => this.textContent = old, 1500);
-            });
-        });
-    });
+overlay.addEventListener('click', () => {
+    if(opened) return;
+    opened = true;
+
+    envelope.classList.add('open');
+
+    setTimeout(()=>{
+        overlay.classList.add('hide');
+    },1400);
+
+    setTimeout(()=>{
+        main.classList.add('show');
+        overlay.style.display='none';
+    },2000);
+});
 </script>
+
 </body>
 </html>
