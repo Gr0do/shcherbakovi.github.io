@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Приглашение на свадьбу Никиты и Ксении</title>
-    <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- СТИЛИ КОНВЕРТА --- */
@@ -98,7 +97,7 @@
             visibility: visible;
         }
 
-        /* --- ВСЕ ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ (с изменённым фоном и удалённым оверлеем) --- */
+        /* --- ОСНОВНЫЕ СТИЛИ --- */
         * {
             margin: 0;
             padding: 0;
@@ -111,7 +110,6 @@
             position: relative;
             min-height: 100vh;
         }
-        /* НОВЫЙ ФОН - ваше изображение (без затемнения) */
         .custom-bg {
             position: fixed;
             top: 0;
@@ -124,9 +122,6 @@
             background-repeat: no-repeat;
             z-index: -3;
         }
-        /* ОВЕРЛЕЙ ПОЛНОСТЬЮ УБРАН — фон теперь чистый */
-        /* .bg-overlay удалён */
-
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -365,10 +360,13 @@
         .color-dot:hover {
             transform: scale(1.05);
         }
+        /* Цвета кружков: серый, коричневый, оливковый, СВЕТЛО-КОРИЧНЕВЫЙ/КРЕМОВЫЙ (4-й), тусклый розовый (5-й) */
         .dot-gray { background-color: #D3D3D3; }
         .dot-brown { background-color: #C4A484; }
         .dot-olive { background-color: #A3B86C; }
-        .dot-beige { background-color: #F5F5DC; }
+        .dot-cream { background-color: #EAD7C3; }   /* светло-коричневый / кремовый */
+        .dot-dusty-pink { background-color: #DCA3A3; }
+
         .flower-request {
             background: rgba(255, 248, 235, 0.9);
             backdrop-filter: blur(5px);
@@ -411,7 +409,6 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ ПОВЕРХ ВСЕГО -->
 <div class="envelope" id="envelopeIntro">
     <div class="envelope-card" id="envelopeCard">
         <div class="flap"></div>
@@ -420,10 +417,8 @@
     </div>
 </div>
 
-<!-- ОСНОВНОЕ СОДЕРЖИМОЕ (скрыто, пока конверт не откроют) -->
 <div class="main-content" id="mainContent">
     <div class="custom-bg"></div>
-    <!-- bg-overlay полностью удалён -->
 
     <div class="container">
         <div class="hero">
@@ -496,7 +491,7 @@
                 <div class="card-header">❀ Свободное время для вас</div>
                 <div class="card-content">
                     <div class="detail-item">После церемонии — приятный перерыв, чтобы отдохнуть, прогуляться и насладиться моментом.</div>
-                    <div class="detail-item">Вы можете составить нам компанию на небольших фотосессии до 14:00.</div>
+                    <div class="detail-item">Вы можете составить нам компанию на фотосессиях до 14:00.</div>
                     <div class="detail-item">Ориентировочное время: с <strong>12:00 до 14:50</strong></div>
                     <div class="note">Проведите это время с удовольствием: фото, тёплые беседы, небольшой глоток шампанского.</div>
                 </div>
@@ -525,7 +520,7 @@
                     <div class="detail-item"><strong>11:20</strong> — Церемония бракосочетания</div>
                     <div class="detail-item"><strong>12:00 – 14:50</strong> — Свободное время, приятные хлопоты</div>
                     <div class="detail-item"><strong>15:00</strong> — Сбор в гостевом доме «Камыши» (официальный дресс-код)</div>
-                    <div class="detail-item"><strong>Вечерняя программа</strong> + баня, чан, бассейн (купальники приветствуются)</div>
+                    <div class="detail-item"><strong>Вечерняя программа</strong> + баня, чан, бассейн</div>
                     <hr>
                     <div class="note">Маленькая просьба: возьмите с собой улыбку и тёплые объятия, остальное мы организуем с любовью!</div>
                 </div>
@@ -533,9 +528,9 @@
             <div class="card">
                 <div class="card-header">❁ Сердечные пожелания</div>
                 <div class="card-content">
-                    <div class="detail-item">По любым вопросам вы всегда можете связаться с нашими близкими или организаторами — мы на связи.</div>
+                    <div class="detail-item">По любым вопросам вы всегда можете связаться с нами — мы всегда на связи.</div>
                     <div class="detail-item">Для нас главное — разделить этот день с вами. Пусть каждый миг согреет душу.</div>
-                    <div class="note">Мы очень ждём вас и верим, что этот день останется в памяти, как одно из самых светлых мгновений!</div>
+                    <div class="note">Мы очень ждём вас и верим, что этот день останется в памяти, как одно из самых светлых воспоминаний!</div>
                 </div>
             </div>
         </div>
@@ -546,7 +541,8 @@
                 <div class="color-dot dot-gray" title="Пастельный серый"></div>
                 <div class="color-dot dot-brown" title="Пастельный коричневый"></div>
                 <div class="color-dot dot-olive" title="Пастельный оливковый"></div>
-                <div class="color-dot dot-beige" title="Пастельный бежевый"></div>
+                <div class="color-dot dot-cream" title="Светло-коричневый / кремовый"></div>
+                <div class="color-dot dot-dusty-pink" title="Тусклый розовый"></div>
             </div>
             <p style="font-size: 0.9rem; margin-top: 0.8rem; opacity: 0.8;">официальный праздничный дресс-код</p>
         </div>
@@ -585,7 +581,7 @@
         envelopeBlock.addEventListener('click', openEnvelope);
     })();
 
-    // Ваш оригинальный скрипт (анимация карточек при скролле и копирование)
+    // Анимация карточек при скролле
     const cards = document.querySelectorAll('.card');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -598,6 +594,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
     cards.forEach(card => observer.observe(card));
 
+    // Копирование адреса
     document.querySelectorAll('.btn-copy').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
