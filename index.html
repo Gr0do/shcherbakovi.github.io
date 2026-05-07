@@ -360,12 +360,13 @@
         .color-dot:hover {
             transform: scale(1.05);
         }
-        /* Цвета кружков: серый, коричневый, оливковый, СВЕТЛО-КОРИЧНЕВЫЙ/КРЕМОВЫЙ (4-й), тусклый розовый (5-й) */
+        /* Цвета кружков: серый, коричневый, оливковый, кремовый, тускло-розовый, и новый голубой (#95b6ea) */
         .dot-gray { background-color: #D3D3D3; }
         .dot-brown { background-color: #C4A484; }
         .dot-olive { background-color: #A3B86C; }
-        .dot-cream { background-color: #EAD7C3; }   /* светло-коричневый / кремовый */
+        .dot-cream { background-color: #EAD7C3; }
         .dot-dusty-pink { background-color: #DCA3A3; }
+        .dot-lightblue { background-color: #95b6ea; }
 
         .flower-request {
             background: rgba(255, 248, 235, 0.9);
@@ -518,7 +519,7 @@
                 <div class="card-content">
                     <div class="detail-item"><strong>11:00</strong> — Встреча гостей перед церемонией (ЗАГС, пр. Ленина, 131)</div>
                     <div class="detail-item"><strong>11:20</strong> — Церемония бракосочетания</div>
-                    <div class="detail-item"><strong>12:00 – 14:50</strong> — Свободное время, приятные хлопоты</div>
+                    <div class="detail-item"><strong>12:00 – 14:50</strong> — Свободное время</div>
                     <div class="detail-item"><strong>15:00</strong> — Сбор в гостевом доме «Камыши» (официальный дресс-код)</div>
                     <div class="detail-item"><strong>Вечерняя программа</strong> + баня, чан, бассейн</div>
                     <hr>
@@ -543,6 +544,7 @@
                 <div class="color-dot dot-olive" title="Пастельный оливковый"></div>
                 <div class="color-dot dot-cream" title="Светло-коричневый / кремовый"></div>
                 <div class="color-dot dot-dusty-pink" title="Тусклый розовый"></div>
+                <div class="color-dot dot-lightblue" title="Пастельный голубой"></div>
             </div>
             <p style="font-size: 0.9rem; margin-top: 0.8rem; opacity: 0.8;">официальный праздничный дресс-код</p>
         </div>
@@ -559,13 +561,11 @@
 </div>
 
 <script>
-    // Анимация конверта
     (function() {
         const envelopeBlock = document.getElementById('envelopeIntro');
         const envelopeCard = document.getElementById('envelopeCard');
         const mainContent = document.getElementById('mainContent');
         let isOpened = false;
-
         function openEnvelope() {
             if (isOpened) return;
             isOpened = true;
@@ -581,7 +581,6 @@
         envelopeBlock.addEventListener('click', openEnvelope);
     })();
 
-    // Анимация карточек при скролле
     const cards = document.querySelectorAll('.card');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -594,7 +593,6 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
     cards.forEach(card => observer.observe(card));
 
-    // Копирование адреса
     document.querySelectorAll('.btn-copy').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
